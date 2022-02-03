@@ -1,0 +1,2 @@
+solution = function (pocketStr) { 
+   };
