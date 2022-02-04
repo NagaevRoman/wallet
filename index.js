@@ -1,22 +1,35 @@
 solution = function (pocketStr) {
 
-  // if ((/\+/i).test(pocketStr.split(' + '))){
+   if ((/\+/i).test(pocketStr.split(' '))){
     let num = pocketStr.split(' + ').map(el => {
-      console.log(el);
-        (/.коп/gi.test(el)) ? 
+
+       return (/.коп/gi.test(el)) ? 
         +el.replace(/[^0-9]/g, '') : 
-        (el.replace(/[^0-9]/g, '') +"00")
-        console.log(el.replace(/[^0-9]/g, '') +"00");
-      console.log();
-    }).reduce((acc, el)=> acc + el).toString();
-    // console.log(num);
-    return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
+        +(el.replace(/[^0-9]/g, '') +"00")
 
+    }).reduce((acc, el)=> acc + el
+    ).toString();
+      return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
 
+   } else {
+    let num = pocketStr.split(' - ').map(el => {
 
+      return (/.коп/gi.test(el)) ? 
+       +el.replace(/[^0-9]/g, '') : 
+       +(el.replace(/[^0-9]/g, '') +"00")
 
+   }).reduce((acc, el)=> acc - el
+   ).toString();
+     return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
    }
-   console.log(solution('2бун + 3бун 20коп'));
+
+
+  }
+
+
+
+   console.log(solution('20коп - 20коп'));
+
 
   //  if ((/\-/i).test(pocketStr.split(' '))){
   //   let num = pocketStr.split(' - ').map(el => +el.replace(/[^0-9]/g, '')).reduce((acc, el)=> acc - el
@@ -80,7 +93,7 @@ solution = function (pocketStr) {
 // console.log( pocketStr.split(' + '));
 
 
-// console.log(solution('2бун + 3бун 20коп'));
+
 
 
 //  для поиска знака нужно индекс +1 поделить на 3 === 0
