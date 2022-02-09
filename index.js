@@ -1,34 +1,91 @@
-solution = function (pocketStr) {
+// solution = function (pocketStr) {
 
-   if ((/\+/i).test(pocketStr.split(' '))){
-    let num = pocketStr.split(' + ').map(el => {
+//    if ((/\+/i).test(pocketStr.split(' '))){
+//     let num = pocketStr.split(' + ').map(el => {
 
-       return (/.коп/gi.test(el)) ? 
-        +el.replace(/[^0-9]/g, '') : 
-        +(el.replace(/[^0-9]/g, '') +"00")
+//        return (/.коп/gi.test(el)) ? 
+//         +el.replace(/[^0-9]/g, '') : 
+//         +(el.replace(/[^0-9]/g, '') +"00")
 
-    }).reduce((acc, el)=> acc + el
-    ).toString();
-      return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
+//     }).reduce((acc, el)=> acc + el
+//     )/100
+//     console.log(Math.round((num.toFixed(2))));
+//       return   `${Math.trunc((num.toFixed(2)))}бун ` + `${num.toFixed(2) -Math.round((num.toFixed(2)))}коп` 
+//    } else {
+//     let num = pocketStr.split(' - ').map(el => {
 
-   } else {
-    let num = pocketStr.split(' - ').map(el => {
+//       return (/.коп/gi.test(el)) ? 
+//        +el.replace(/[^0-9]/g, '') : 
+//        +(el.replace(/[^0-9]/g, '') +"00")
 
-      return (/.коп/gi.test(el)) ? 
-       +el.replace(/[^0-9]/g, '') : 
-       +(el.replace(/[^0-9]/g, '') +"00")
-
-   }).reduce((acc, el)=> acc - el
-   ).toString();
-     return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
-   }
-
-
-  }
+//    }).reduce((acc, el)=> acc - el
+//    ).toString();
+//      return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
+//    }
 
 
+//   }
 
-   console.log(solution('20коп - 20коп'));
+solution = function (pocketStr) {  
+
+  let byn = 0;
+  let kop = 0;
+
+
+  pocketStr.split(' ').forEach(el => {
+    if (/.коп/gi.test(el)) {
+      kop += +el.replace(/[^0-9]/g, '')
+      if (kop >= 100) {
+        byn += 1
+        kop -= 100
+      }
+    }
+    if (/.бун/gi.test(el)) {
+      byn += +el.replace(/[^0-9]/g, '')
+    }
+  })
+  return `${byn}бун ` + `${kop}коп`
+}
+console.log(solution('1бун + 1бун'));
+
+  // if ((/\+/i).test(pocketStr.split(' '))){
+  //  let num = pocketStr.split(' + ').map(el => {
+
+  //       console.log(el.replace(/[^0-9]/g, '').length);
+  //       // if (el.length === 2) {
+  //       //   console.log(el);
+  //       // }
+        
+  //       if (/.коп/gi.test(el)) {
+  //         return +el.replace(/[^0-9]/g, '')
+  //       } else {
+  //         return +(el.replace(/[^0-9]/g, '') +"00")
+  //       }
+
+  //     // return (/.коп/gi.test(el)) ? 
+  //     //  +el.replace(/[^0-9]/g, '') : 
+  //     //  +(el.replace(/[^0-9]/g, '') +"00")
+
+  //  }).reduce((acc, el)=> acc + el
+  //  ).toString();
+  // //  console.log(num);
+  //    return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
+
+  // } else {
+  //  let num = pocketStr.split(' - ').map(el => {
+
+  //    return (/.коп/gi.test(el)) ? 
+  //     +el.replace(/[^0-9]/g, '') : 
+  //     +(el.replace(/[^0-9]/g, '') +"00")
+
+  // }).reduce((acc, el)=> acc - el
+  // ).toString();
+  //   return  (num > 100) ? `${num.slice(0, -2)}бун ` + `${num.slice(-2)}коп` : `${parseInt(num/100)}бун ` + `${num}коп`
+  // }
+
+
+
+   
 
 
   //  if ((/\-/i).test(pocketStr.split(' '))){
@@ -100,3 +157,50 @@ solution = function (pocketStr) {
 
 // const numbers = (1800, 50, 300, 20, 100); // subtract all numbers from first number // since 1st element is called as accumulator rather than currentValue // 1800 - 50 - 300 - 20 - 100 
 // let difference = numbers.reduce( (accumulator, currentValue) => accumulator - currentValue ); console.log(difference);
+
+
+
+// let byn = 0;
+// let kop = 0;
+// if ((/\+/i).test(pocketStr.split(' '))){
+//   spliterPositive(pocketStr);
+//   return `${byn}бун ` + `${kop}коп`
+// } else if ((/\-/i).test(pocketStr.split(' '))) {
+//   spliterPositive(pocketStr.split('-')[0])
+//   spliterNegative(pocketStr.split('-')[1])
+//   return `${byn}бун ` + `${kop}коп`
+// } else {
+//   return `${byn}бун ` + `${kop}коп`
+// }
+
+// function spliterPositive(str) {
+//   str.split(' ').forEach(el => {
+//     if (/.коп/gi.test(el)) {
+//       kop += +el.replace(/[^0-9]/g, '')
+//       if (kop > +el.replace(/[^0-9]/g, '')) {
+//         byn += 1
+//         kop -= 100
+//       }
+//     }
+//     if (/.бун/gi.test(el)) {
+//       byn += +el.replace(/[^0-9]/g, '')
+//     }
+//   })
+// }
+
+// function spliterNegative(str) {
+//   str.split(' ').forEach(el => {
+
+//     if (/.коп/gi.test(el)) {
+      
+//       if (kop < +el.replace(/[^0-9]/g, '')) {
+//         byn -= 1
+//         kop += 100
+//       }
+//       kop -= +el.replace(/[^0-9]/g, '')
+//     }
+//     if (/.бун/gi.test(el)) {
+//       byn -= +el.replace(/[^0-9]/g, '')
+//     }
+//   })
+// }
